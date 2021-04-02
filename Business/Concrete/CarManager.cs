@@ -1,6 +1,7 @@
 ﻿using Business.Abstract;
 using DataAccess.Abstract;
 using Entities.Concrete;
+using Entities.DTOs;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -40,9 +41,16 @@ namespace Business.Concrete
             Console.WriteLine("Araç sistemden silinmiştir.");  
         }
 
-        public List<Car> GetAll()
+        public List<Car> GetAllCars()
         {
             return _carDal.GetAll();    
+        }
+
+      
+
+        public List<CarDetailsDto> GetCarDetails()
+        {
+            return _carDal.GetCarDetails();
         }
 
         public List<Car> GetCarsByBrandId(int id)

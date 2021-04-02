@@ -15,5 +15,16 @@ namespace DataAccess.Concrete.EntityFramework
         public DbSet<Car> Cars { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<Color> Colors { get; set; }
+        //public DbSet<Personel> Personels { get; set; }
+        //protected override void OnModelCreating(ModelBuilder modelBuilder)
+        //{
+        //    // fluent mapping
+        //    // modelBuilder.HasDefaultSchema("dbo");
+        //    modelBuilder.Entity<Personel>().ToTable("Employees");
+
+        //    modelBuilder.Entity<Personel>().Property(p => p.Id).HasColumnName("EmployeeID");
+        //    modelBuilder.Entity<Personel>().Property(p => p.Name).HasColumnName("FirstName");
+        //    modelBuilder.Entity<Personel>().Property(p => p.Surname).HasColumnName("LastName");
+        //}
     }
 }
