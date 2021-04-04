@@ -17,15 +17,15 @@ namespace DataAccess.Concrete.EntityFramework
         {
             using (NorthwindContext context = new NorthwindContext())
             {
-                var result = from m in context.Cars
+                var result = from e in context.Cars
                              join b in context.Brands
-                             on m.BrandId equals b.BrandId
+                             on e.BrandId equals b.BrandId
                              join c in context.Colors
-                             on m.ColorId equals c.ColorId
+                             on e.ColorId equals c.ColorId
                              select new CarDetailsDto
                              {
-                                 CarId = m.CarId,
-                                 CarName = m.CarName,
+                                 CarId = e.CarId,
+                                 CarName = e.CarName,
                                  BrandName = b.BrandName,
                                  ColorName = c.ColorName
 

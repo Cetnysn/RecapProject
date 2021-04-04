@@ -25,7 +25,7 @@ namespace ConsoleUI
                 BrandId = 2,
             };
             brandManager.Add(brand);
-            foreach (var brands in brandManager.GetAllBrands())
+            foreach (var brands in brandManager.GetAllBrands().Data)
             {
                 Console.WriteLine(brands.BrandName);
             }
@@ -39,7 +39,7 @@ namespace ConsoleUI
                 ColorName = "Java Green"
             };
             colorManager.Add(color);
-            foreach (var colors in colorManager.GetAllColors())
+            foreach (var colors in colorManager.GetAllColors().Data)
             {
                 Console.WriteLine(colors.ColorName);
             }
@@ -50,31 +50,35 @@ namespace ConsoleUI
         private static void CarTest()
         {
             CarManager carManager = new CarManager(new EFCarDal());
-            Car car1 = new Car
+            var result = carManager.GetCarDetails();
+            if (result.Success== true)
             {
-                CarId = 2
-            };
-
-            carManager.Add(new Car { BrandId = 1, CarId = 1, CarName = "Mercedes", ColorId = 1, DailyPrice = 329, ModelYear = 2013, Description = "Premium aile aracı" });
-            foreach (var cars in carManager.GetCarDetails())
+                foreach (var car in carManager.GetCarDetails().Data)
+                {
+                    Console.WriteLine(car.CarName + "/" + car.BrandName);
+                }
+            }
+            else
             {
-                Console.WriteLine("{0} / {1} / {2} / {3}", cars.CarName, cars.BrandName, cars.ColorName, cars.DailyPrice);
-            };
+                Console.WriteLine(result.Message);
+            }
+            carManager.Delete(new Car { CarId = 1, BrandId = 2, CarName = "Maserati" }) ;
 
-            foreach (var cars in carManager.GetAllCars())
+
+            foreach (var cars in carManager.GetAllCars().Data)
             {
                 Console.WriteLine(cars.CarName);
             }
-            foreach (var cars in carManager.GetCarsByBrandId(1))
+            foreach (var cars in carManager.GetCarsByBrandId(1).Data)
             {
                 Console.WriteLine(cars.DailyPrice);
             }
-            foreach (var cars in carManager.GetCarsByColorId(5))
+            foreach (var cars in carManager.GetCarsByColorId(5).Data)
             {
                 Console.WriteLine(cars.ModelYear);
             }
 
-            carManager.Delete(car1);
+            
         }
     }
 }
